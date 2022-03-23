@@ -85,9 +85,9 @@ trait HasImageUploads
         $this->uploadFieldOptions = $this->getUploadFieldOptions($this->uploadFieldName);
 
         // get the model attribute value
-        if(Arr::get($this->uploadFieldOptions, 'update_database',true)){
-            $attributeValue = $this->getOriginal($this->uploadFieldName); 
-        }else{
+        if (Arr::get($this->uploadFieldOptions, 'update_database', true)) {
+            $attributeValue = $this->getOriginal($this->uploadFieldName);
+        } else {
             $attributeValue = $this->getFileUploadPath($field);
         }
 
@@ -576,15 +576,15 @@ trait HasImageUploads
         // check if update_database = false (default: true)
         $imagesFields = $this->getDefinedUploadFields();
         $actualField=Arr::get($imagesFields, $imageFieldName);
-        $updateAuthorized=Arr::get($actualField, 'update_database',true);
+        $updateAuthorized=Arr::get($actualField, 'update_database', true);
 
         // update model (if update_database=true or not set)
-        if($updateAuthorized){
+        if ($updateAuthorized) {
             $this->attributes[$imageFieldName] = $imagePath;
             $dispatcher = $this->getEventDispatcher();
             self::unsetEventDispatcher();
             $this->save();
-            self::setEventDispatcher($dispatcher); 
+            self::setEventDispatcher($dispatcher);
         }
     }
 
